@@ -56,14 +56,15 @@ void loop() {
 }
 
 void typeWriting(char *str, int len, int rw) {
-  clearRow(rw, true);
+  clearRow(rw);
+  delay(10);
   for (int i = 0;i<len;i++) {
     char* tmp = new char[i+2];
     for(int q = 0; q < i+1; q++) {
       tmp[q] = str[q];
     }
     tmp[i+1] = '\0';
-    clearRow(rw, false);
+    clearRow(rw);
     lcd.setCursor(0, rw);
     lcd.print(tmp);
     delete tmp;
@@ -71,12 +72,9 @@ void typeWriting(char *str, int len, int rw) {
   }
 }
 
-void clearRow(int rw, bool wait) {
+void clearRow(int rw) {
   for (int i = 15; i >=0;i--){
     lcd.setCursor(i, rw);
     lcd.print("_");
-    if (wait) {
-      delay(10);
-    }
   }
 }
